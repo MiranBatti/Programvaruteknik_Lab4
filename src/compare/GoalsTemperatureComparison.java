@@ -18,6 +18,13 @@ public class GoalsTemperatureComparison {
 		result = builder.getResult();
 	}
 	
+	public GoalsTemperatureComparison(Resolution res) {
+		goals = new FootballGoalsSource();
+		temperatures = new TemperatureSource();
+		builder = new DataCollectionBuilder(goals, temperatures, res);
+		result = builder.getResult();
+	}
+	
 	public String getData() {
 		StringBuilder sb = new StringBuilder();
 		
