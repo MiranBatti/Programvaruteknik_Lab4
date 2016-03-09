@@ -16,29 +16,24 @@ import compare.GoalsTemperatureComparison;
 @WebServlet("/CompareServer")
 public class CompareServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	public GoalsTemperatureComparison gt;
+	
     /**
      * Default constructor. 
      */
-    public CompareServer() {
+	public CompareServer() {
+    	gt = new GoalsTemperatureComparison();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GoalsTemperatureComparison gt = new GoalsTemperatureComparison();
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		response.setContentType("application/json;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
         	Boolean pretty = Boolean.valueOf(request.getParameter("pretty"));
             JsonFormatter format = new JsonFormatter();
-            
-            if(pretty == true) {
-            	out.println(format.format(gt.getData())); // 1. skillnad mellan 1 och 2?
-            } else
-        		response.getWriter().append(gt.getData()); // 2.            	
-        }
+
+            response.getWriter().append((pretty ? format.format(gt.getData()) : gt.getData()));
 	}
 
 	/**

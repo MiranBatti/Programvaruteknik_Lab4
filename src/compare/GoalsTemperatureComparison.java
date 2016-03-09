@@ -29,16 +29,16 @@ public class GoalsTemperatureComparison {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("{");
-		sb.append("\"Data\": ");
+		sb.append("\"Data\": [");
 		
 		result.getData().forEach((date, match) -> {
 			sb.append(
-		            "{\"Date\":" + date + "," + 
+		            "{\"Date\":" + "\"" + date + "\"" + "," + 
 					"\"Goals\":" + match.getXValue() + "," +
 					"\"Temperature\":" + match.getYValue() + " },");
 		});
 		sb.deleteCharAt(sb.length() - 1);
-		sb.append("}");
+		sb.append("]}");
 		
 		return sb.toString();
 	}
